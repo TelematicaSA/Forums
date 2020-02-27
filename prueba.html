@@ -1,83 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-/* Popup container - can be anything you want */
-.popup {
-  position: relative;
+.button {
   display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
+  border-radius: 10px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
   text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
+  font-size: 20px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
   position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
 }
 
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+.button:hover span {
+  padding-right: 25px;
 }
 
-/* Toggle this class - hide and show the popup */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 </style>
 </head>
-<body style="text-align:justify">
 
-<p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxxx</p>
+<body>
+<h2>JavaScript</h2>
+<p>Line-breaks in a popup box.</p>
 
 
-<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<p>
-<div class="popup" onclick="myFunction()">Ver respuesta!
-  <span class="popuptext" id="myPopup">la respuesta es</span>
-</div>
 
-<script>
-// When the user clicks on div, open the popup
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-</script>
+
+<button class="button" style="vertical-align:middle"  onclick="alert('La respuesta es A')"><span>Ver Respuesta </span></button>
+
+
+<button class="button" style="vertical-align:middle"  onclick="alert('La Respuesta es B')"><span>Ver Respuesta </span></button>
 
 </body>
 </html>
