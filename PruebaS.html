@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro del curso — IntenseDebate</title>
+  <meta name="robots" content="noindex" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb; --ink:#1f2a37; --muted:#667085; --brand:#0b57d0; --bord:#e6edf3; --accent:#0b57d0;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b1220; --ink:#e2e8f0; --muted:#8ea0b5; --brand:#4f46e5; --bord:#233044; --accent:#4f46e5; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(11,87,208,.10), transparent 40%), var(--bg);
+    }
+
+    .wrap{ max-width:980px; margin:32px auto; padding:0 18px; }
+
+    h1.site-title{ margin:0 0 6px; font-size:1.6rem }
+    p.site-intro{ margin:0 0 16px; color:var(--muted) }
+
+    /* Tarjeta de la pregunta (compacta) */
+    .q-card{
+      position:relative; padding:16px 18px 12px 18px;
+      border:1px solid var(--bord); border-radius:14px;
+      background:rgba(255,255,255,.6); backdrop-filter:saturate(120%) blur(2px);
+      margin-bottom:10px;
+    }
+    @media (prefers-color-scheme: dark){ .q-card{ background:rgba(255,255,255,.03); } }
+    .q-card:before{
+      content:""; position:absolute; left:0; top:10px; bottom:10px; width:6px; border-radius:6px; background:var(--accent);
+    }
+    .q-title{ margin:0 0 8px; color:var(--accent); font-weight:700 }
+    .q-body p{ margin:8px 0 }
+    .q-hint{ margin:8px 0 0; color:var(--muted); font-style:italic }
+
+    /* Botones (sin flecha) */
+    .under{ display:flex; gap:12px; margin:8px 0 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:6px;
+      padding:7px 10px; border-radius:10px; border:1px solid rgba(11,87,208,.25);
+      font-weight:700; font-size:.92rem; text-decoration:none; cursor:pointer;
+    }
+    .btn.login{ background:var(--brand); color:#fff; border-color:transparent }
+    .btn.ghost{ background:transparent; color:var(--brand) }
+
+    /* ===== IntenseDebate centrado y desplazado 3.5cm a la derecha ===== */
+    .comments-wrap{
+      margin-top:6px;
+      margin-left: 3.5cm;           /* << desplaza 3.5 cm a la derecha */
+      max-width: 860px;
+    }
+    /* El contenedor real de ID se crea dentro; limitamos ancho y centramos dentro del bloque desplazado */
+    #idc-container{ max-width:860px; }
+    /* En pantallas estrechas, no desplazamos para que no se corte */
+    @media (max-width: 900px){
+      .comments-wrap{ margin-left: 0; }
+    }
+
+    /* Ocultar extras del widget */
+    #idc-container .idc-head,
+    #idc-container .idc-rss,
+    #idc-container .idc-poweredby,
+    #idc-container .idc-subscribe{ display:none !important; }
+
+    /* Editor cómodo */
+    #idc-container textarea{ min-height:160px !important; border-radius:12px !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="site-title">Foro del curso</h1>
+    <p class="site-intro">Comparte tu aporte y revisa los comentarios de tus compañeros. Mantén un tono profesional y respetuoso.</p>
+
+    <!-- Pregunta -->
+    <section class="q-card">
+      <h3 class="q-title">A partir de tu experiencia, responde:</h3>
+      <div id="forumQuestion" class="q-body">
+        <p><strong>¿Qué ventajas tendría para tu organización integrar datos BIM y GIS en un solo entorno? ¿Qué tipo de análisis harías con ello?</strong></p>
+        <p>Gracias a la integración BIM–GIS, es posible visualizar, analizar y decidir en un solo entorno donde el diseño técnico se cruza con el territorio real. Esto abre oportunidades concretas en planificación y normativas, gestión de riesgos y GRD, evaluación de capacidad de servicios/utilities, así como operación y mantenimiento del activo, con impacto directo en costos/plazos, entre otros.</p>
+        <p class="q-hint">Comparte tu experiencia, ideas o ejemplos. Este foro es un espacio de diálogo.</p>
+      </div>
+    </section>
+
+    <!-- Botones -->
+    <div class="under">
+      <a id="btnLogin" class="btn login" href="#">Iniciar sesión</a>
+      <a id="btnComentar" class="btn ghost" href="#idc_thread_container">Comentar</a>
+    </div>
+
+    <!-- Comentarios desplazados 3.5 cm -->
+    <div class="comments-wrap">
+      <span id="IDCommentsPostTitle" style="display:none"></span>
+      <div id="idc_thread_container"></div>
+    </div>
+
+    <!-- ===== CONFIGURACIÓN DEL HILO ===== -->
+    <script>
+      const ACCOUNT_ID   = '52c114e499bfef51aa7420f6cc093a06'; // NO cambiar
+      const THREAD_ID    = 'modulo-bim-412';                    // ← CAMBIAR si creas otro
+      const THREAD_URL   = 'https://tuusuario.github.io/foros/modulo-bim-412.html'; // ← CAMBIAR
+      const HIDDEN_TITLE = '4.12 Foro de discusión: Integración BIM–GIS';          // oculto para ID
+
+      document.getElementById('IDCommentsPostTitle').textContent = HIDDEN_TITLE;
+      window.idcomments_acct     = ACCOUNT_ID;
+      window.idcomments_post_id  = THREAD_ID;
+      window.idcomments_post_url = THREAD_URL;
+    </script>
+    <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
+
+    <script>
+      // Botón "Comentar": scroll y foco
+      document.getElementById('btnComentar').addEventListener('click', (e)=>{
+        const target = document.querySelector('#idc_thread_container');
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        let tries = 0;
+        const iv = setInterval(()=>{
+          const ta = document.querySelector('#idc-container textarea');
+          if (ta || tries++ > 25){ clearInterval(iv); if(ta) ta.focus(); }
+        }, 200);
+      });
+
+      // Botón "Iniciar sesión": popup y recarga al cerrar
+      function openPopup(url, w=520, h=620){
+        const left = (screen.width - w) / 2, top = (screen.height - h) / 2;
+        const win = window.open(url, '_blank', `scrollbars=yes,resizable=yes,width=${w},height=${h},top=${top},left=${left}`);
+        if(!win){ location.href = url; return; }
+        const timer = setInterval(()=>{ if(win.closed){ clearInterval(timer); location.reload(); } }, 600);
+      }
+      document.getElementById('btnLogin').addEventListener('click', (e)=>{
+        e.preventDefault(); openPopup('https://intensedebate.com/signup');
+      });
+    </script>
+  </div>
+</body>
+</html>
