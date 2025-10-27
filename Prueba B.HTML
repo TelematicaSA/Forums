@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro del curso — IntenseDebate</title>
+  <meta name="robots" content="noindex" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --ink:#1f2a37; --muted:#6b7280;
+      --brand:#0b57d0; --bord:#e6edf3; --radius:16px;
+      --shadow:0 20px 45px rgba(16,24,40,.10);
+      --ok:#0ea5e9;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b1220; --card:#0f172a; --ink:#e2e8f0; --muted:#7a8aa0;
+        --brand:#4f46e5; --bord:#233044; --shadow:0 22px 55px rgba(0,0,0,.35);
+        --ok:#38bdf8;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(11,87,208,.10), transparent 40%), var(--bg);
+    }
+
+    /* ===== Caja única centrada ===== */
+    .wrap{ max-width:1080px; margin:28px auto; padding:0 18px; }
+    .forum-card{
+      background:var(--card); border:1px solid var(--bord); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:22px; margin:0 auto; max-width:980px;
+    }
+    .forum-inner{ max-width:840px; margin:0 auto; }
+
+    .head{
+      display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px;
+    }
+    .copy-btn{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
+      border:1px solid var(--bord); background:#fff0; color:var(--ink); text-decoration:none;
+    }
+
+    .opening{ color:var(--muted); font-size:.95rem; margin:0 0 6px; }
+    h1.title{ margin:0; font-size:1.45rem; letter-spacing:.2px }
+    .desc{ margin:6px 0 12px; color:var(--muted) }
+
+    .login-row{ display:flex; gap:10px; margin:10px 0 14px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:9px 12px; border-radius:10px; border:1px solid var(--bord);
+      background:var(--brand); color:#fff; text-decoration:none; font-weight:700;
+      box-shadow:0 10px 22px rgba(11,87,208,.18);
+      cursor:pointer;
+    }
+
+    /* ===== Ajustes/centrado del widget ===== */
+    #idc_thread_container{ margin-top:6px; }
+    #idc-container{ max-width:840px; margin:0 auto; } /* ancho alineado a la caja */
+
+    /* ===== Ocultar elementos tachados ===== */
+    #idc-container .idc-rss,            /* icono RSS */
+    #idc-container .idc-admin,          /* Admin Options */
+    #idc-container .idc-subscribe,      /* Subscribe to */
+    #idc-container .idc-poweredby,      /* Powered by */
+    #idc-container .idc-head            /* barra con Dashboard / Edit profile / Logout */
+    { display:none !important; }
+
+    /* Botón enviar más claro */
+    #idc-container input[type="submit"], #idc-container button[type="submit"]{
+      background:var(--ok) !important; color:#fff !important; border:none !important;
+      padding:10px 14px !important; border-radius:10px !important; font-weight:700 !important;
+    }
+
+    /* textarea más cómodo */
+    #idc-container textarea{
+      min-height:160px !important; border-radius:12px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="forum-card">
+      <div class="head">
+        <div style="font-weight:700">Foro del curso</div>
+        <a class="copy-btn" id="copyLinkBtn" href="#">Copiar enlace</a>
+      </div>
+
+      <div class="forum-inner">
+        <!-- Línea solicitada antes del título -->
+        <p id="opening" class="opening">Participa respondiendo la consigna y revisa los aportes de tus compañeros.</p>
+
+        <h1 id="topicTitle" class="title">Título del hilo</h1>
+        <p id="topicDesc" class="desc">Descripción o consigna del hilo.</p>
+
+        <!-- Botón de login (popup) justo antes de la caja de comentarios -->
+        <div class="login-row">
+          <a class="btn" id="loginBtn" href="#">Iniciar sesión para comentar</a>
+        </div>
+
+        <!-- IntenseDebate -->
+        <span id="IDCommentsPostTitle" style="display:none"></span>
+        <div id="idc_thread_container"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== CONFIGURACIÓN DEL HILO (solo cambia estas constantes) ========== -->
+  <script>
+    const ACCOUNT_ID   = '52c114e499bfef51aa7420f6cc093a06';          // NO cambiar
+    const THREAD_ID    = 'general';                                     // ← CAMBIAR
+    const THREAD_TITLE = 'Tema: General';                               // ← CAMBIAR
+    const THREAD_DESC  = 'Conversación abierta entre participantes.';   // ← CAMBIAR
+    const THREAD_URL   = 'https://tuusuario.github.io/foros/general.html'; // ← CAMBIAR (URL pública exacta)
+    const OPENING_LINE = 'Participa respondiendo la consigna y revisa los aportes de tus compañeros.'; // ← opcional
+
+    // Pinta encabezado
+    document.getElementById('topicTitle').textContent = THREAD_TITLE;
+    document.getElementById('topicDesc').textContent  = THREAD_DESC;
+    document.getElementById('opening').textContent    = OPENING_LINE;
+    document.getElementById('IDCommentsPostTitle').textContent = THREAD_TITLE;
+
+    // Variables globales para IntenseDebate (deben existir ANTES del wrapper)
+    window.idcomments_acct     = ACCOUNT_ID;
+    window.idcomments_post_id  = THREAD_ID;
+    window.idcomments_post_url = THREAD_URL;
+  </script>
+  <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
+
+  <!-- Utilidades: copiar enlace + login popup con recarga al cerrar -->
+  <script>
+    // Copiar enlace
+    document.getElementById('copyLinkBtn').addEventListener('click', async (e)=>{
+      e.preventDefault();
+      try{
+        await navigator.clipboard.writeText(window.location.href);
+        e.currentTarget.textContent = 'Enlace copiado ✓';
+        setTimeout(()=> e.currentTarget.textContent = 'Copiar enlace', 1500);
+      }catch{}
+    });
+
+    // Abrir popup de login y recargar al cerrarse
+    function openPopup(url, w=520, h=620){
+      const dualLeft = window.screenLeft ?? window.screenX;
+      const dualTop  = window.screenTop  ?? window.screenY;
+      const width  = window.innerWidth  || document.documentElement.clientWidth  || screen.width;
+      const height = window.innerHeight || document.documentElement.clientHeight || screen.height;
+      const left = dualLeft + (width - w)/2;
+      const top  = dualTop  + (height - h)/2;
+      const opts = `scrollbars=yes,resizable=yes,width=${w},height=${h},top=${top},left=${left}`;
+      const win = window.open(url, '_blank', opts);
+      if(!win){ window.location.href = url; return; } // si bloquea popup, navegar
+
+      // cuando el popup se cierre, recarga para tomar la sesión
+      const timer = setInterval(()=>{
+        if (win.closed){
+          clearInterval(timer);
+          window.location.reload();
+        }
+      }, 600);
+    }
+    document.getElementById('loginBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      openPopup('https://www.intensedebate.com/signup');
+    });
+
+    // Ocultar enlaces de moderación ("Delete", "Block IP") si aparecen
+    const hideModerationLinks = () => {
+      document.querySelectorAll('#idc-container a, #idc_thread_container a').forEach(a=>{
+        if (/delete|block ip/i.test(a.textContent)) a.style.display = 'none';
+      });
+    };
+    const mo = new MutationObserver(hideModerationLinks);
+    mo.observe(document.body, {childList:true, subtree:true});
+  </script>
+</body>
+</html>
