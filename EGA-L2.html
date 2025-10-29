@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro de discusión:</title>
+  <meta name="robots" content="noindex" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- ⚠️ NO MODIFICAR estilos salvo que quieras cambiar la estética general -->
+  <style>
+    :root{
+      --bg:#f6f8fb; --ink:#1f2a37; --muted:#667085; --brand:#0b57d0; --bord:#e6edf3; --accent:#0b57d0;
+      --blue-50:#eff6ff; --blue-100:#dbeafe; --blue-200:#bfdbfe;
+      --blue-600:#0b57d0; --blue-700:#0a49b1; --blue-800:#0a3e95;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b1220; --ink:#e2e8f0; --muted:#8ea0b5; --brand:#4f46e5; --bord:#233044; --accent:#4f46e5;
+        --blue-50:rgba(79,70,229,.10); --blue-100:rgba(79,70,229,.15); --blue-200:rgba(79,70,229,.20);
+        --blue-600:#4f46e5; --blue-700:#4038c3; --blue-800:#362fa6;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:none !important;
+    }
+    .wrap{ max-width:980px; margin:32px auto; padding:0 18px; }
+
+    /* ===== Cabecera en caja elegante ===== */
+    .site-head{ margin:0 0 10px; }
+    .title-card{
+      display:flex; align-items:center; gap:10px;
+      padding:12px 14px; border:1px solid var(--bord); border-radius:14px;
+      background:#fff; box-shadow:0 8px 22px rgba(16,24,40,.08);
+    }
+    @media (prefers-color-scheme: dark){
+      .title-card{ background:rgba(255,255,255,.06); box-shadow:0 10px 26px rgba(0,0,0,.28); }
+    }
+    h1.site-title{ margin:0; font-size:1.6rem }
+    p.site-intro{ margin:10px 2px 0; color:var(--muted); font-size:.95rem; text-align:justify }
+
+    /* ===== Burbuja con piquito hacia ABAJO ===== */
+    .q-card{
+      position:relative; padding:16px 18px 12px 18px; border:1px solid var(--bord);
+      border-radius:14px; background:#fff; box-shadow:0 10px 22px rgba(16,24,40,.08);
+      margin-top:22px; margin-bottom:20px;
+    }
+    @media (prefers-color-scheme: dark){
+      .q-card{ background:rgba(255,255,255,.06); box-shadow:0 12px 26px rgba(0,0,0,.28); }
+    }
+    .q-card::after{
+      content:""; position:absolute; left:26px; bottom:-8px; width:14px; height:14px; background:inherit;
+      border-left:1px solid var(--bord); border-bottom:1px solid var(--bord);
+      transform: rotate(45deg); border-bottom-left-radius:4px; filter: drop-shadow(0 2px 2px rgba(16,24,40,.06));
+    }
+    .q-title{ margin:0 0 6px; color:var(--accent); font-weight:700; font-size:1rem; opacity:.95 }
+    .q-body p{ margin:8px 0 }
+    .q-body p:first-child strong{ display:inline-block; font-size:1.125rem; line-height:1.5; font-weight:800; color:var(--ink) }
+    .q-hint{ margin:8px 0 0; color:var(--muted); font-style:italic; font-size:.95rem }
+
+    /* Botones */
+    .under{ display:flex; gap:12px; margin:8px 0 10px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:6px;
+      padding:7px 12px; border-radius:10px; font-weight:700; font-size:.92rem; cursor:pointer;
+      text-decoration:none; transition:.18s ease;
+    }
+    .btn.login{ background:var(--blue-600); color:#fff; border:1px solid transparent; }
+    .btn.login:hover{ background:var(--blue-700); }
+    .btn.ghost{ background:var(--blue-50); color:var(--blue-700); border:1px solid var(--blue-200); }
+    .btn.ghost:hover{ background:var(--blue-100); color:var(--blue-800); border-color:var(--blue-200); }
+
+    /* IntenseDebate desplazado 3.5 cm (puedes quitarlo si no lo necesitas) */
+    .comments-wrap{ margin-top:6px; margin-left:3.5cm; max-width:860px; }
+    #idc-container{ max-width:860px; }
+    @media (max-width:900px){ .comments-wrap{ margin-left:0; } }
+
+    /* Ocultar extras del widget */
+    #idc-container .idc-head, #idc-container .idc-rss, #idc-container .idc-poweredby, #idc-container .idc-subscribe{ display:none !important; }
+    #idc-container textarea{ min-height:160px !important; border-radius:12px !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ===== CABECERA DEL HILO (EDITABLE) ===== -->
+    <header class="site-head">
+      <div class="title-card">
+        <!-- Ícono: puedes cambiarlo si quieres -->
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"
+             style="flex:0 0 22px; color:var(--brand)" fill="none">
+          <path d="M7 10h6M7 14h10M5 19l3.5-2H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 2 2.83V19z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1 class="site-title"><!-- TODO: TÍTULO VISUAL DEL HILO --> 2.8 Foro de discusión: Estableciendo una meta a corto plazo</h1>
+      </div>
+      <p class="site-intro"><!-- TODO: DESCRIPCIÓN DEL HILO (texto introductorio) -->
+        La incorporación del GIS en planes de TI requiere pasos concretos y una visión temporal: corto, mediano y largo plazo. Esto permite evolucionar desde iniciativas rápidas hasta proyectos complejos de transformación digital.
+      </p>
+    </header>
+
+    <!-- ===== PREGUNTA PRINCIPAL (EDITABLE) ===== -->
+    <section class="q-card">
+      <h3 class="q-title">Si tuvieras que priorizar...</h3>
+      <div id="forumQuestion" class="q-body">
+        <p><strong><!-- TODO: PREGUNTA DEL FORO -->
+          ¿Qué acción colocarías en el corto plazo para impulsar el GIS en tu organización?
+        </strong></p>
+        <p class="q-hint"><!-- (Opcional) Pista/tono del foro -->
+          Reflexiona, comparte tu perspectiva y conoce cómo otros participantes trazan su hoja de ruta hacia un GIS más sólido.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Botones (opcional cambiar solo el enlace del tutorial) ===== -->
+    <div class="under">
+      <a class="btn ghost" href="https://photos.smugmug.com/TalentLMS-Cursos-Regulares/AGOL/i-g7pcvnm/0/NJfbTNTq44ftFvrz39h6bXGCGwzWPCrJLzbHNFjXn/O/Tuto%20IntenseDebate.png" target="_blank" rel="noopener">¿Cómo participar en el foro?</a>
+      <a id="btnLogin" class="btn login" href="#">Iniciar sesión</a>
+      <a id="btnComentar" class="btn ghost" href="#idc_thread_container">Comentar</a>
+    </div>
+
+    <!-- ===== IntenseDebate: contenedor de comentarios (NO CAMBIAR) ===== -->
+    <div class="comments-wrap">
+      <span id="IDCommentsPostTitle" style="display:none"></span>
+      <div id="idc_thread_container"></div>
+    </div>
+
+    <!-- ====== CONFIGURACIÓN DEL HILO (AQUÍ VAN LOS 4 VALORES CLAVE) ====== -->
+    <script>
+      /* =================== SOLO EDITA ESTO PARA CADA HILO ===================
+         1) ACCOUNT_ID:  tu ID de cuenta de IntenseDebate (suele ser fijo)
+         2) THREAD_ID:    identificador ÚNICO del hilo (slug corto, sin espacios)
+         3) THREAD_URL:   URL canónica donde vive este HTML (absoluta)
+         4) HIDDEN_TITLE: título interno para el hilo (para panel/notificaciones)
+      ====================================================================== */
+      const ACCOUNT_ID   = '2550561219616a95c9405e8c815e574e';      // TODO: normalmente NO cambia
+      const THREAD_ID    = 'ID-EGA-L2';                         // TODO: cambia en cada hilo (p.ej. "modulo-gis-213")
+      const THREAD_URL   = 'https://telematicasa.github.io/Forums/ID-EGA-L2.html'; // TODO: cambia a la URL pública de este HTML
+      const HIDDEN_TITLE = 'ID-EGA-L2';            // TODO: título interno/administrativo
+
+      // ⚠️ No cambies lo de abajo: son las variables globales que IntenseDebate necesita.
+      document.getElementById('IDCommentsPostTitle').textContent = HIDDEN_TITLE;
+      window.idcomments_acct     = ACCOUNT_ID;
+      window.idcomments_post_id  = THREAD_ID;
+      window.idcomments_post_url = THREAD_URL;
+    </script>
+    <!-- Carga el wrapper de comentarios (NO CAMBIAR) -->
+    <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
+
+    <!-- UX: comentar + login (puedes dejarlo tal cual) -->
+    <script>
+      // Botón "Comentar": scroll y foco
+      document.getElementById('btnComentar').addEventListener('click', (e)=>{
+        const target = document.querySelector('#idc_thread_container');
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        let tries = 0;
+        const iv = setInterval(()=>{
+          const ta = document.querySelector('#idc-container textarea');
+          if (ta || tries++ > 25){ clearInterval(iv); if(ta) ta.focus(); }
+        }, 200);
+      });
+
+      // Botón "Iniciar sesión": abre popup y recarga cuando se cierre
+      let _loginPopup = null;
+      function openPopup(url, w=520, h=620){
+        const left = (screen.width - w) / 2, top = (screen.height - h) / 2;
+        return window.open(url, '_blank', `scrollbars=yes,resizable=yes,width=${w},height=${h},top=${top},left=${left}`);
+      }
+      document.getElementById('btnLogin').addEventListener('click', (e)=>{
+        e.preventDefault();
+        _loginPopup = openPopup('https://intensedebate.com/signup');
+        const watch = setInterval(()=>{
+          if(!_loginPopup || _loginPopup.closed){
+            clearInterval(watch);
+            location.reload();
+          }
+        }, 600);
+      });
+    </script>
+  </div>
+</body>
+</html>
+
+
