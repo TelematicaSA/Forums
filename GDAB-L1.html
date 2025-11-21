@@ -15,59 +15,48 @@
       font-family: 'Cabin', sans-serif;
       color: #333;
       background: #ffffff;
-      line-height: 1.5; /* Reduje ligeramente el interlineado */
+      line-height: 1.5;
     }
 
     .wrap {
       max-width: 950px;
       margin: 0 auto;
-      padding: 20px; /* Reduje el padding superior del contenedor */
+      padding: 20px;
     }
 
-    /* ===== 1. ENCABEZADO COMPACTO ===== */
+    /* ===== 1. ENCABEZADO (Sin icono, alineado a la izquierda) ===== */
     .header-modern {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px; /* Reduje gap */
-      margin-bottom: 20px; /* Reduje margen inferior drásticamente */
-      padding-bottom: 15px; /* Reduje padding inferior */
+      /* Eliminé flex y gap ya que solo queda un elemento, 
+         pero lo dejo bloque para que ocupe el ancho */
+      display: block; 
+      margin-bottom: 20px;
+      padding-bottom: 15px;
       border-bottom: 1px solid #eee;
-    }
-
-    .header-icon {
-      flex-shrink: 0;
-      width: 48px; /* Icono ligeramente más pequeño */
-      height: 48px;
-      background: #eef4ff;
-      color: #0057d9;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 5px;
     }
 
     .header-content h1 {
       margin: 0 0 5px 0;
-      font-size: 24px; /* Ajusté tamaño título */
+      font-size: 24px;
       color: #003163;
       font-weight: 700;
       line-height: 1.2;
+      text-align: left; /* Asegura alineación izquierda */
     }
 
     .header-content p {
       margin: 0;
       font-size: 15px;
       color: #666;
+      text-align: left; /* Asegura alineación izquierda */
     }
 
-    /* ===== 2. CAJA DE PREGUNTA COMPACTA ===== */
+    /* ===== 2. CAJA DE PREGUNTA ===== */
     .discussion-prompt {
       background-color: #f9fafb;
       border-left: 4px solid #0057d9;
       border-radius: 6px;
-      padding: 20px 25px; /* Reduje el padding interno */
-      margin-bottom: 20px; /* Menos espacio debajo de la caja */
+      padding: 20px 25px;
+      margin-bottom: 20px;
     }
 
     .prompt-label {
@@ -99,12 +88,12 @@
     .action-area {
       display: flex;
       gap: 10px;
-      margin-bottom: 25px; /* Espacio reducido antes de los comentarios */
+      margin-bottom: 25px;
       flex-wrap: wrap;
     }
 
     .btn-pill {
-      padding: 8px 20px; /* Botones un poco más compactos */
+      padding: 8px 20px;
       border-radius: 50px;
       font-size: 14px;
       font-weight: 600;
@@ -114,8 +103,10 @@
       align-items: center;
       justify-content: center;
       border: 1px solid transparent;
+      cursor: pointer;
     }
 
+    /* Estilo Azul Oscuro (Resaltado) */
     .btn-primary {
       background-color: #003163;
       color: white;
@@ -123,6 +114,7 @@
     }
     .btn-primary:hover { background-color: #00448a; transform: translateY(-1px); }
 
+    /* Estilo Blanco (Secundario) */
     .btn-secondary {
       background-color: white;
       border-color: #e0e0e0;
@@ -130,15 +122,14 @@
     }
     .btn-secondary:hover { border-color: #0057d9; color: #0057d9; background-color: #fcfdff; }
 
-    /* ===== 4. INTENSEDEBATE ALINEADO (NO TOCAR LÓGICA) ===== */
+    /* ===== 4. INTENSEDEBATE ALINEADO (NO TOCAR) ===== */
     
     .comments-wrapper {
       width: 100%;
       border-top: 1px solid #eee;
-      padding-top: 15px; /* Menos espacio arriba de la caja de texto */
+      padding-top: 15px;
     }
 
-    /* Reseteo total para alineación */
     #idc-container {
       padding: 0 !important;
       margin: 0 !important;
@@ -163,7 +154,7 @@
       padding: 12px !important;
       background: #fff !important;
       font-family: 'Cabin', sans-serif !important;
-      min-height: 80px !important; /* Altura mínima reducida */
+      min-height: 80px !important;
       box-shadow: none !important;
     }
     
@@ -177,11 +168,6 @@
   <div class="wrap">
 
     <header class="header-modern">
-      <div class="header-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H6L4,18V4H20V16Z" />
-        </svg>
-      </div>
       <div class="header-content">
         <h1>1.12 Foro de discusión: Fundamentos de Gemelos Digitales</h1>
         <p>En esta lección revisamos qué es un gemelo digital, cómo se diferencia de un modelo 3D o BIM convencional y de qué manera, al integrarse con GIS, puede acompañar todo el ciclo de vida de la infraestructura: desde el planeamiento y diseño, hasta la construcción, operación y mantenimiento.</p>
@@ -199,8 +185,7 @@
     </section>
 
     <div class="action-area">
-      <a id="btnLogin" class="btn-pill btn-primary" href="#">Iniciar sesión</a>
-      <a id="btnComentar" class="btn-pill btn-secondary" href="#idc_thread_container">Escribir comentario</a>
+      <a id="btnComentar" class="btn-pill btn-primary" href="#idc_thread_container">Escribir comentario</a>
       <a class="btn-pill btn-secondary" href="https://photos.smugmug.com/TalentLMS-Cursos-Regulares/AGOL/i-g7pcvnm/0/NJfbTNTq44ftFvrz39h6bXGCGwzWPCrJLzbHNFjXn/O/Tuto%20IntenseDebate.png" target="_blank">¿Cómo participar?</a>
     </div>
 
@@ -225,7 +210,7 @@
     <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
 
     <script>
-      // Botones
+      // Botón Scroll a comentarios
       document.getElementById('btnComentar').addEventListener('click', (e)=>{
         e.preventDefault();
         const target = document.querySelector('#idc_thread_container');
@@ -236,20 +221,6 @@
              if(ta) ta.focus();
           }, 500);
         }
-      });
-
-      let _loginPopup = null;
-      document.getElementById('btnLogin').addEventListener('click', (e)=>{
-        e.preventDefault();
-        const w = 520, h = 620;
-        const left = (screen.width - w) / 2, top = (screen.height - h) / 2;
-        _loginPopup = window.open('https://intensedebate.com/signup', '_blank', `width=${w},height=${h},top=${top},left=${left}`);
-        const watch = setInterval(()=>{
-          if(!_loginPopup || _loginPopup.closed){
-            clearInterval(watch);
-            location.reload();
-          }
-        }, 600);
       });
     </script>
   </div>
