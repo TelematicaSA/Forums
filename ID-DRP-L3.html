@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro de discusión</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== ESTILOS GENERALES ===== */
+    body {
+      margin: 0;
+      font-family: 'Cabin', sans-serif;
+      color: #333;
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* ===== 1. ENCABEZADO (Sin icono, alineado a la izquierda) ===== */
+    .header-modern {
+      /* Eliminé flex y gap ya que solo queda un elemento, 
+         pero lo dejo bloque para que ocupe el ancho */
+      display: block; 
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .header-content h1 {
+      margin: 0 0 5px 0;
+      font-size: 24px;
+      color: #003163;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left; /* Asegura alineación izquierda */
+    }
+
+    .header-content p {
+      margin: 0;
+      font-size: 15px;
+      color: #666;
+      text-align: left; /* Asegura alineación izquierda */
+    }
+
+    /* ===== 2. CAJA DE PREGUNTA ===== */
+    .discussion-prompt {
+      background-color: #f9fafb;
+      border-left: 4px solid #0057d9;
+      border-radius: 6px;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+    }
+
+    .prompt-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0057d9;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .prompt-text {
+      font-size: 18px;
+      color: #222;
+      font-weight: 500;
+      margin: 0 0 10px 0;
+      line-height: 1.4;
+    }
+
+    .prompt-sub {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* ===== 3. BOTONES ===== */
+    .action-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn-pill {
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    /* Estilo Azul Oscuro (Resaltado) */
+    .btn-primary {
+      background-color: #003163;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 49, 99, 0.15);
+    }
+    .btn-primary:hover { background-color: #00448a; transform: translateY(-1px); }
+
+    /* Estilo Blanco (Secundario) */
+    .btn-secondary {
+      background-color: white;
+      border-color: #e0e0e0;
+      color: #555;
+    }
+    .btn-secondary:hover { border-color: #0057d9; color: #0057d9; background-color: #fcfdff; }
+
+    /* ===== 4. INTENSEDEBATE ALINEADO (NO TOCAR) ===== */
+    
+    .comments-wrapper {
+      width: 100%;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    #idc-container {
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* Ocultar elementos basura */
+    #idc-container .idc-head, 
+    #idc-container .idc-head_text,
+    #idc-container h3,
+    #idc-container .idc-footer,
+    #idc-container .idc-text_small { 
+      display: none !important; 
+    }
+
+    /* Textarea Moderno */
+    #idc-container textarea {
+      width: 100% !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      padding: 12px !important;
+      background: #fff !important;
+      font-family: 'Cabin', sans-serif !important;
+      min-height: 80px !important;
+      box-shadow: none !important;
+    }
+    
+    #idc-container textarea:focus {
+      border-color: #0057d9 !important;
+      outline: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="header-modern">
+      <div class="header-content">
+        <h1>3.4 Foro de discusión</h1>
+        <p>Al integrar en un mapa la información de daños, recursos desplegados y población atendida, las instituciones pueden coordinar de manera más eficiente y transparente, optimizando tiempos y recursos en momentos críticos.</p>
+      </div>
+    </header>
+
+    <section class="discussion-prompt">
+      <span class="prompt-label">Ahora reflexiona:</span>
+      <p class="prompt-text">
+        ¿Qué solución basada en mapas y tableros podrías implementar en tu institución para coordinar mejor con otras áreas o entidades durante una crisis y asegurar que la ayuda llegue de manera oportuna y equitativa?
+      </p>
+      <p class="prompt-sub">
+        Comparte tu experiencia o punto de vista.
+      </p>
+    </section>
+
+    <div class="action-area">
+      <a id="btnComentar" class="btn-pill btn-primary" href="#idc_thread_container">Escribir comentario</a>
+      <a class="btn-pill btn-secondary" href="https://photos.smugmug.com/TalentLMS-Cursos-Regulares/AGOL/i-g7pcvnm/0/NJfbTNTq44ftFvrz39h6bXGCGwzWPCrJLzbHNFjXn/O/Tuto%20IntenseDebate.png" target="_blank">¿Cómo participar?</a>
+    </div>
+
+    <div class="comments-wrapper">
+      <span id="IDCommentsPostTitle" style="display:none"></span>
+      <div id="idc_thread_container"></div>
+    </div>
+
+    <script>
+      /* === CONFIGURACIÓN === */
+      const ACCOUNT_ID   = '2550561219616a95c9405e8c815e574e';     
+      const THREAD_ID    = 'ID-DRP-L3';                          
+      const THREAD_URL   = 'https://telematicasa.github.io/Forums/ID-DRP-L3.html'; 
+      const HIDDEN_TITLE = 'ID-DRP-L3';            
+
+      document.getElementById('IDCommentsPostTitle').textContent = HIDDEN_TITLE;
+      window.idcomments_acct     = ACCOUNT_ID;
+      window.idcomments_post_id  = THREAD_ID;
+      window.idcomments_post_url = THREAD_URL;
+    </script>
+    
+    <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
+
+    <script>
+      // Botón Scroll a comentarios
+      document.getElementById('btnComentar').addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = document.querySelector('#idc_thread_container');
+        if(target) {
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          setTimeout(() => {
+             const ta = document.querySelector('#idc-container textarea');
+             if(ta) ta.focus();
+          }, 500);
+        }
+      });
+    </script>
+  </div>
+</body>
+</html>
