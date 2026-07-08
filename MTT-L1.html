@@ -26,6 +26,8 @@
 
     /* ===== 1. ENCABEZADO (Sin icono, alineado a la izquierda) ===== */
     .header-modern {
+      /* Eliminé flex y gap ya que solo queda un elemento, 
+         pero lo dejo bloque para que ocupe el ancho */
       display: block; 
       margin-bottom: 20px;
       padding-bottom: 15px;
@@ -38,14 +40,14 @@
       color: #003163;
       font-weight: 700;
       line-height: 1.2;
-      text-align: left;
+      text-align: left; /* Asegura alineación izquierda */
     }
 
     .header-content p {
       margin: 0;
       font-size: 15px;
       color: #666;
-      text-align: left;
+      text-align: left; /* Asegura alineación izquierda */
     }
 
     /* ===== 2. CAJA DE PREGUNTA ===== */
@@ -168,7 +170,7 @@
     <header class="header-modern">
       <div class="header-content">
         <h1>1.4 Foro de discusión</h1>
-        <p>ArcGIS es mucho más que una herramienta para hacer mapas; es una plataforma geoespacial integral. Al conectar de forma transparente la captura de datos en campo, la visualización interactiva y el análisis en la nube, permite a las organizaciones optimizar sus flujos de trabajo y tomar decisiones empresariales más inteligentes y fundamentadas.</p>
+        <p>ArcGIS es mucho más que una herramienta para hacer mapas, es una plataforma geoespacial integral. Al conectar de forma transparente la captura de datos en campo, la visualización interactiva y el análisis en la nube, permite a las organizaciones optimizar sus flujos de trabajo y tomar decisiones empresariales más inteligentes y fundamentadas.</p>
       </div>
     </header>
 
@@ -178,7 +180,7 @@
         Piensa en los procesos actuales de tus clientes o de tu propia organización. ¿Qué flujo de trabajo específico (por ejemplo, el levantamiento de activos en campo, la supervisión de técnicos o la entrega de reportes gerenciales) se vería más beneficiado al integrar las capacidades de captura, visualización y análisis de ArcGIS, y por qué?
       </p>
       <p class="prompt-sub">
-        Comparte tu experiencia, ideas o ejemplos reales. Este foro es un espacio de diálogo.
+        Comparte tu experiencia, ideas o ejemplos. Este foro es un espacio de diálogo.
       </p>
     </section>
 
@@ -224,3 +226,4 @@
   </div>
 </body>
 </html>
+
