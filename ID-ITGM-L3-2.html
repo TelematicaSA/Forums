@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foro de discusión</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================================================
+       GUÍA DE COLORES (CAMBIA SOLO ESTO PARA PERSONALIZAR)
+       ======================================================
+    */
+    :root {
+      --color-primario: #003163;    /* Color de Título y Botón Principal */
+      --color-acento: #0057d9;      /* Color de Borde de pregunta y Etiquetas */
+      --color-fondo-caja: #f9fafb;  /* Fondo suave de la zona de pregunta */
+      --color-texto: #333333;       /* Color del cuerpo de texto */
+      --fuente-cabin: 'Cabin', sans-serif;
+    }
+
+    /* ===== ESTILOS GENERALES (No tocar márgenes) ===== */
+    body {
+      margin: 0;
+      font-family: var(--fuente-cabin);
+      color: var(--color-texto);
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    .wrap {
+      width: 100%; /* Aprovecha el ancho total según lo trabajado */
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* ===== 1. ENCABEZADO (Alineado a la izquierda) ===== */
+    .header-modern {
+      display: block; 
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      margin-top: 10px; /* Consistencia con páginas anteriores */
+    }
+
+    .header-content h1 {
+      margin: 0 0 5px 0;
+      font-size: 26px;
+      color: var(--color-primario);
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .header-content p {
+      margin: 0;
+      font-size: 15.5px;
+      color: #666;
+      text-align: left;
+    }
+
+    /* ===== 2. CAJA DE PREGUNTA ===== */
+    .discussion-prompt {
+      background-color: var(--color-fondo-caja);
+      border-left: 5px solid var(--color-acento);
+      border-radius: 6px;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+    }
+
+    .prompt-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-acento);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .prompt-text {
+      font-size: 17px;
+      color: #222;
+      font-weight: 500;
+      margin: 0 0 10px 0;
+      line-height: 1.5;
+    }
+
+    .prompt-sub {
+      font-size: 14px;
+      color: #666;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* ===== 3. BOTONES ===== */
+    .action-area {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn-pill {
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primario);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 49, 99, 0.15);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background-color: white;
+      border-color: #e0e0e0;
+      color: #555;
+    }
+    .btn-secondary:hover { 
+        border-color: var(--color-acento); 
+        color: var(--color-acento); 
+        background-color: #fcfdff; 
+    }
+
+    /* ===== 4. INTENSEDEBATE ALINEADO (NO TOCAR) ===== */
+    .comments-wrapper {
+      width: 100%;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    #idc-container textarea:focus {
+      border-color: var(--color-acento) !important;
+      outline: none !important;
+    }
+
+    /* Otros estilos ID necesarios ocultos por limpieza */
+    #idc-container .idc-head, #idc-container .idc-head_text,
+    #idc-container h3, #idc-container .idc-footer,
+    #idc-container .idc-text_small { display: none !important; }
+
+    #idc-container textarea {
+      width: 100% !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      padding: 12px !important;
+      font-family: var(--fuente-cabin) !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="header-modern">
+      <div class="header-content">
+        <h1>3.4 Foro de discusión</h1>
+        <p>Ahora que conoces algunas de las capacidades de EasyLand, piensa en las necesidades o problemáticas que existen en tu distrito.  </p>
+      </div>
+    </header>
+
+    <section class="discussion-prompt">
+      <span class="prompt-label">Reflexiona y comparte tu experiencia:</span>
+      <p class="prompt-text">
+       ¿De qué manera implementaría las capacidades de easyland en la gestión de su territorio?
+      </p>
+      <p class="prompt-sub">
+        Comparte tu experiencia, ideas o ejemplos. Este foro es un espacio de diálogo.
+      </p>
+    </section>
+
+    <div class="action-area">
+      <a id="btnComentar" class="btn-pill btn-primary" href="#idc_thread_container">Escribir comentario</a>
+      <a class="btn-pill btn-secondary" href="https://photos.smugmug.com/CURSO-GEMELOS-DIGITALES/Intro/i-VL2F6Cd/0/NX9jcskHHVHP7LNVRTQBKZ68tsT5WmBpZ3t75Wjvs/O/Comentar%20en%20Intense%20debate.gif" target="_blank">¿Cómo participar?</a>
+    </div>
+
+    <div class="comments-wrapper">
+      <span id="IDCommentsPostTitle" style="display:none"></span>
+      <div id="idc_thread_container"></div>
+    </div>
+
+    <script>
+      /* CAMBIAR ESTOS VALORES PARA CADA FORO DIFERENTE */
+      const ACCOUNT_ID   = '2550561219616a95c9405e8c815e574e';     
+      const THREAD_ID    = 'ID-ITGM-L3-2';                                     
+      const THREAD_URL   = 'https://telematicasa.github.io/Forums/ID-ITGM-L3-2.html'; 
+      const HIDDEN_TITLE = 'ID-ITGM-L3-2';            
+
+      document.getElementById('IDCommentsPostTitle').textContent = HIDDEN_TITLE;
+      window.idcomments_acct     = ACCOUNT_ID;
+      window.idcomments_post_id  = THREAD_ID;
+      window.idcomments_post_url = THREAD_URL;
+    </script>
+    
+    <script src="https://www.intensedebate.com/js/genericCommentWrapperV2.js"></script>
+
+    <script>
+      // Lógica del Botón
+      document.getElementById('btnComentar').addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = document.querySelector('#idc_thread_container');
+        if(target) {
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          setTimeout(() => {
+             const ta = document.querySelector('#idc-container textarea');
+             if(ta) ta.focus();
+          }, 500);
+        }
+      });
+    </script>
+  </div>
+</body>
+</html>
